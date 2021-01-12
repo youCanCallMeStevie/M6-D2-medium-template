@@ -5,7 +5,10 @@ import ArticleListItem from "../../components/ArticleListItem/ArticleListItem";
 import './styles.scss'
 import articles from '../home/articles.json'
 import TagsList from '../../components/TagsList/TagsList';
-import queryString from 'query-string'
+import queryString from 'query-string';
+
+import{getArticles} from "../../api/index"
+
 
 export default class Search extends React.Component {
 

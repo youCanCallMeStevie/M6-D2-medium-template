@@ -6,6 +6,9 @@ import article from "./data.json";
 import { IoLogoTwitter, IoLogoLinkedin, IoLogoFacebook } from "react-icons/io";
 import { IoBookmarkOutline } from "react-icons/io5";
 import Reactions from "../../components/Reactions/Reactions"
+
+import{getArticles} from "../../api/index"
+
 class Read extends Component {
   render() {
     return (

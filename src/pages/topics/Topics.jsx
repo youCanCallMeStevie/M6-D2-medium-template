@@ -5,6 +5,8 @@ import './styles.scss'
 
 import topics from './data'
 
+import { getAllArticles } from "../../api/index";
+
 export default class Topics extends React.Component {
   render = () => (
     <Container id="topics-page">
