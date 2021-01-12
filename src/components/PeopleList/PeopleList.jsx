@@ -1,7 +1,8 @@
-import React from 'react'
-import { Card, Badge } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import './styles.scss'
+import React from 'react';
+import { Card, Badge } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import './styles.scss';
+import uniqid from "uniqid"
 
 export default class PeopleList extends React.Component {
 
@@ -22,8 +23,8 @@ export default class PeopleList extends React.Component {
     render = () => (
         <div className="people-container">
             {
-                this.state.people.map(person => <Card style={{ border: 'none', margin: '2px', position: 'relative'}}>
-                    <Card.Img variant="top" src={person.picture.large} className="rounded-circle" />
+                this.state.people.map(person => <Card key={uniqid()} style={{ border: 'none', margin: '2px', position: 'relative'}}>
+                    <Card.Img variant="top" src={person.picture.large} className="rounded-circle"/>
                     {
                         person.newStories > 0 && 
                         <Badge pill variant="dark" className="position-absolute" style={{

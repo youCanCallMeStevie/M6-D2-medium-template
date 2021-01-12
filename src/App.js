@@ -5,10 +5,12 @@ import NavBar from "./components/NavBar/NavBar";
 import Home from "./pages/home/Home";
 import NewStory from "./pages/new-story/NewStory";
 import Topics from "./pages/topics/Topics";
-import Read from "./pages/read/Read"
-import Search from "./pages/search/Search"
-import Stats from "./pages/stats"
-import Stories from "./pages/stories"
+import Read from "./pages/read/Read";
+import Search from "./pages/search/Search";
+import Stats from "./pages/stats";
+import Stories from "./pages/stories";
+import uniqid from "uniqid";
+
 const routes = [
   { path: "/", component: Home },
   { path: "/new-story", component: NewStory },
@@ -25,7 +27,7 @@ function App() {
       <NavBar />
       {
         routes.map(({ path, component }) =>
-          <Route exact path={path} component={component} />
+          <Route exact path={path} component={component} key={uniqid()} />
         )
       }
     </Router>

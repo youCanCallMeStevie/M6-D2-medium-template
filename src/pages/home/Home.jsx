@@ -7,12 +7,15 @@ import PeopleList from "../../components/PeopleList/PeopleList";
 import TopicsToFollow from "../../components/TopicsToFollow/TopicsToFollow";
 import articles from "./articles.json";
 import "./styles.scss";
+import uniqid from "uniqid";
+
 import { getArticles } from "../../api/index";
 
 export default class Home extends Component {
   state = {
     articles: articles,
   };
+
   render() {
     return (
       <div>
@@ -36,6 +39,7 @@ export default class Home extends Component {
                   articleImg={"left"}
                   headingFont={"small"}
                   article={article}
+                  key={uniqid()}
                 />
               ))}
             </Col>
@@ -54,6 +58,8 @@ export default class Home extends Component {
                   headingFont={"large"}
                   subheading
                   article={article}
+                                    key={uniqid()}
+
                 />
               ))}
             </Col>
@@ -68,7 +74,8 @@ export default class Home extends Component {
                   <span className={"ml-2"}>READING LIST </span>
                 </div>
                 {this.state.articles.slice(0, 3).map(article => (
-                  <ArticleListItem headingFont={"small"} article={article} />
+                  <ArticleListItem headingFont={"small"} article={article}                   key={uniqid()}
+                  />
                 ))}
               </div>
               <Footer />

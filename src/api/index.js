@@ -32,7 +32,6 @@ export const getOneArticle = async(articleId)=> {
       try {
         const response = await axios.get(
           `${REACT_APP_BE_URL}/articles/${articleId}`,
-          answers,
           config
         );
         console.log("hellooo");
