@@ -6,32 +6,68 @@ import { Button } from "react-bootstrap";
 import "./styles.scss";
 import CategoryPicker from "../../components/CategoryPicker";
 
-import{postArticle} from "../../api/index"
-
+import { postArticle } from "../../api/index";
 
 export default class NewStory extends Component {
   state = {
-    html: "",
+    htmlString: "",
+    article: {
+      headLine: "",
+      subHead: "",
+      content: "",
+      category: "",
+      author: {
+        name: "John Doe",
+        img: "https://ui-avatars.com/api/?name=John+Doe",
+      },
+      cover: "",
+    }
   };
+
   editor = React.createRef();
-  onChange = (html) => {
-    this.setState({ html })
-    console.log(html)
+
+	handleSubmit = async () => {
+    const result = await postArticle(this.state.article);
+
+		if (result.success) {
+			this.setState({
+				article: {
+					headLine: "",
+					content: "",
+					category: { name: "", img: "" },
+					author: {name: "John Doe",
+          img: "https://ui-avatars.com/api/?name=John+Doe",
+						},
+					cover: "",
+				},
+			});
+    }
   };
-  onKeyDown = (e) => {
+  onChange = htmlString => {
+    this.setState({ htmlString });
+    console.log(htmlString);
+  };
+  onKeyDown = e => {
     if (e.key === "Enter") {
       e.preventDefault();
       this.editor && this.editor.current.focus();
     }
   };
   render() {
-    const { html } = this.state;
+    const { headLine, content, category, cover } = this.state.article;
+    const { htmlString } = this.state;
     return (
       <Container className="new-story-container" expand="md">
         <div className="category-container">
-        <CategoryPicker onChange={(topic)=>{console.log(topic)}} />
+          <CategoryPicker
+            onChange={topic => {
+              console.log(topic);
+            }}
+          />
         </div>
         <input
+        id="headLine"
+        value={headLine}
           onKeyDown={this.onKeyDown}
           placeholder="Title"
           className="article-title-input"
@@ -42,7 +78,8 @@ export default class NewStory extends Component {
           formats={NewStory.formats}
           ref={this.editor}
           theme="bubble"
-          value={html}
+          value={htmlString}
+          id="htmlString"
           onChange={this.onChange}
           placeholder="Tell your story..."
         />
@@ -50,9 +87,11 @@ export default class NewStory extends Component {
           onKeyDown={this.onKeyDown}
           placeholder="Cover link e.g : https://picsum.photos/800"
           className="article-cover-input"
+          id="cover"
+          value={cover}
         />
-       
-        <Button variant="success" className="post-btn">
+
+        <Button onClick={this.handleSubmit} variant="success" className="post-btn">
           Post
         </Button>
       </Container>

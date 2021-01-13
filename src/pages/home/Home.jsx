@@ -58,8 +58,7 @@ export default class Home extends Component {
                   headingFont={"large"}
                   subheading
                   article={article}
-                                    key={uniqid()}
-
+                  key={uniqid()}
                 />
               ))}
             </Col>
@@ -74,7 +73,10 @@ export default class Home extends Component {
                   <span className={"ml-2"}>READING LIST </span>
                 </div>
                 {this.state.articles.slice(0, 3).map(article => (
-                  <ArticleListItem headingFont={"small"} article={article}                   key={uniqid()}
+                  <ArticleListItem
+                    headingFont={"small"}
+                    article={article}
+                    key={uniqid()}
                   />
                 ))}
               </div>

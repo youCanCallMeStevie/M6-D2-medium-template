@@ -1,13 +1,49 @@
-import React, { Component } from "react";
-import { Container } from "react-bootstrap";
-import { editArticle, deleteArticle } from "../../api/index";
+import React, { useState, useEffect } from "react";
+import { Container, ListGroup } from "react-bootstrap";
+import { editArticle, deleteArticle, getArticles } from "../../api/index";
+import uniqid from "uniqid"
 
-export default class Stories extends Component {
-  render() {
-    return (
-      <Container>
-        <p>List your stories here</p>
-      </Container>
-    );
-  }
-}
+function Stories () {
+    const [articles, setArticles] = useState([]);
+
+    useEffect(() => {
+		fetchArticles();
+	}, []);
+
+	const fetchArticles = async () => {
+		const result = await getArticles();
+		console.log(result);
+		setArticles(result);
+	};
+	const showArticles = (articles) => {
+		return (
+			<ListGroup>
+				{articles.map((article) => {
+					return (
+						<ListGroup.Item key={uniqid}>
+							<div className='d-flex justify-conten-around'>
+								<img
+									src={article.cover}
+									className='mr-3'
+									style={{ width: "40px", height: "40px" }}
+								/>
+
+								<h3 className='mr-3'>{article.headLine}</h3>
+
+								<p>{article.author.name}</p>
+							</div>
+						</ListGroup.Item>
+					);
+				})}
+			</ListGroup>
+		);
+	};
+	
+		return <Container>
+            {showArticles(articles)}
+        </Container>;
+	
+};
+
+export default Stories;
+
